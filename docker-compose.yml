@@ -1,0 +1,17 @@
+# Optional: Postgres instead of SQLite. Start with `docker compose up -d db`, then set
+# DATABASE_URL=postgresql+psycopg://app:app@localhost:5432/app in .env and run
+# `poetry run migrate` again (the same migrations run on both databases).
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: app
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
